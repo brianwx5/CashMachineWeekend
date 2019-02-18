@@ -29,7 +29,7 @@ public class CashMachine {
         );
     }
 
-    public void deposit(int amount) {
+    public void deposit(Double amount) {
         if (accountData != null) {
             tryCall(
                     () -> bank.deposit(accountData, amount),
@@ -38,7 +38,7 @@ public class CashMachine {
         }
     }
 
-    public void withdraw(int amount) {
+    public void withdraw(Double amount) {
         if (accountData != null) {
             tryCall(
                     () -> bank.withdraw(accountData, amount),
@@ -47,15 +47,24 @@ public class CashMachine {
         }
     }
 
+    public boolean isAccountBalanceWitthdrawn() {
+        boolean result = false;
+        if(accountData.getBalance() <0) {
+            result = true;
+        }
+        return result;
+    }
+
     public void exit() {
         if (accountData != null) {
             accountData = null;
         }
     }
 
+
     @Override
     public String toString() {
-        return accountData != null ? accountData.toString() : "Try account 1000 or 2000 and click submit.";
+        return accountData != null ? accountData.toString() : "Try account 0000 or 5000 and click submit.";
     }
 
     private <T> void tryCall(Supplier<ActionResult<T> > action, Consumer<T> postAction) {
