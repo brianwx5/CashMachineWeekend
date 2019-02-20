@@ -29,6 +29,8 @@ public class CashMachine {
         );
     }
 
+
+
     public void deposit(Double amount) {
         if (accountData != null) {
             tryCall(
@@ -47,13 +49,15 @@ public class CashMachine {
         }
     }
 
-    public boolean isAccountBalanceWitthdrawn() {
+    public boolean isAccountBalanceWithdrawn() {
         boolean result = false;
         if(accountData.getBalance() <0) {
             result = true;
         }
         return result;
     }
+
+
 
     public void exit() {
         if (accountData != null) {

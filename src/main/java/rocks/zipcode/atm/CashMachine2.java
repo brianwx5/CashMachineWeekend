@@ -25,12 +25,14 @@ import javax.xml.soap.Text;
  */
 public class CashMachine2 extends Application {
 
-    private TextField field = new TextField("Ex: 1000");
+    private TextField field = new TextField();
     private TextField field2 = new TextField();
     private TextField field3 = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
 
     private Parent createContent() {
+        field.setPromptText("Ex: 1000");
+
         BorderPane borderPane = new BorderPane();
         borderPane.setPrefSize(600, 600);
 
@@ -58,7 +60,7 @@ public class CashMachine2 extends Application {
             Double amount = Double.parseDouble(field3.getText());
             cashMachine.withdraw(amount);
             areaInfo.setText(cashMachine.toString());
-            if(cashMachine.isAccountBalanceWitthdrawn()){
+            if(cashMachine.isAccountBalanceWithdrawn()){
                 AlertBox.display();}
         });
 
@@ -106,6 +108,7 @@ public class CashMachine2 extends Application {
 
         //Layout
         HBox hBox = new HBox(10);
+
         hBox.getChildren().add(label);
         hBox.getChildren().add(field);
         hBox.getChildren().add(btnSubmit);
@@ -114,18 +117,21 @@ public class CashMachine2 extends Application {
 
         //Vbox
         VBox vBox = new VBox(20);
-        field2.setMinWidth(500);
+        field2.setMinWidth(400);
         vBox.getChildren().add(label2);
         vBox.getChildren().add(field2);
         vBox.getChildren().add(label3);
         vBox.getChildren().add(field3);
-        vBox.setAlignment(Pos.CENTER_LEFT);
-        vBox.setPadding(new Insets(20,20,20,20));
+        vBox.setAlignment(Pos.TOP_LEFT);
+        vBox.setPadding(new Insets(50,20,20,20));
 
         //Vbox 3
         VBox vBox3 = new VBox(60);
         vBox3.getChildren().add(btnDeposit);
         vBox3.getChildren().add(btnWithdraw);
+        Button newAccount = new Button("Create New Account");
+        newAccount.setOnAction(e -> NewAccounts.display());
+        vBox3.getChildren().add(newAccount);
         vBox3.setAlignment(Pos.CENTER);
         vBox3.setPadding(new Insets(56,20,20,20));
 
